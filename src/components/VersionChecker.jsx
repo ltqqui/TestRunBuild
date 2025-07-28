@@ -10,11 +10,11 @@ const VersionChecker = () => {
 
     const checkForUpdates = async () => {
       try {
-        const res = await fetch('/version.json?');
+        const res = await fetch(`/version.json?' + ${Date.now()}`);
         console.log(res)
         // if (!res.ok) throw new Error('Failed to fetch version');
         
-        // const { version } = await res.json();
+        const { version } = await res.json();
         // const currentVersion = process.env.VITE_APP_VERSION || '1.0.0';
         
         // if (version !== currentVersion) {
