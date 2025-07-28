@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import versionJson from '../public/version.json'
 import axios from 'axios';
 
 function App() {
@@ -9,7 +8,6 @@ function App() {
       try {
         // Fetch version từ file tĩnh trên public
         const localResponse = await axios.get('/version.json');
-        console.log(versionJson)
         console.log(localResponse)
         // window.location.reload()
         if (!localResponse.ok) {
@@ -17,9 +15,8 @@ function App() {
         }
         // console.log(window.localStorage.getItem('build-version'))
         if(window.localStorage.getItem('build-version')){
-          if(!versionJson.version===window.localStorage.getItem('build-version')){
-              window.localStorage.setItem('build-version', versionJson.version)
-              
+          if(!localResponse?.version==window.localStorage.getItem('build-version')){
+              window.localStorage.setItem('build-version', localResponse.version)
           }
         }
         
