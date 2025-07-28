@@ -4,9 +4,7 @@ import { useEffect } from 'react';
 const VersionChecker = () => {
   useEffect(() => {
     // Tạo file version.json trong thư mục public khi build
-    const versionFile = process.env.NODE_ENV === 'production' 
-      ? '/version.json' 
-      : '/version.json?' + Date.now();
+   
 
     const checkForUpdates = async () => {
       try {
