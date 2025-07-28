@@ -7,14 +7,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd());
 
   return {
-    plugins: [
-      react(),
-      // pusherPlugin({
-      //   key: env.VITE_PUSHER_KEY,
-      //   cluster: env.VITE_PUSHER_CLUSTER,
-      //   channel: 'update-channel',
-      // }),
-    ],
+    plugins: [react()],
     build: {
       rollupOptions: {
         plugins: [
@@ -23,20 +16,23 @@ export default defineConfig(({ mode }) => {
             writeBundle() {
               if (mode === 'production') {
                 const version = {
-                  version: env.VITE_APP_VERSION || Date.now().toString(),
+                  version: env.VITE_APP_VERSION || new Date().toISOString(), // Sử dụng ISO string thay vì timestamp thô
                   buildTime: new Date().toISOString(),
                 };
-                fs.writeFileSync(
-                  path.resolve(__dirname, 'public/version.json'),
-                  JSON.stringify(version, null, 2)
-                );
+                try {
+                  fs.writeFileSync(
+                    path.resolve(__dirname, 'public/version.json'),
+                    JSON.stringify(version, null, 2)
+                  );
+                } catch (error) {
+                  console.error('Error writing version.json:', error);
+                }
               }
             },
           },
         ],
       },
     },
-    // Thêm các cấu hình khác nếu cần, ví dụ:
     server: {
       port: 3000,
       open: true,

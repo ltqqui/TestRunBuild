@@ -1,37 +1,47 @@
 import { useEffect } from 'react';
-import versionJson from '../public/version.json'
 
 function App() {
   useEffect(() => {
-    console.log(versionJson) 
     const checkForUpdates = async () => {
       try {
-        const response = await fetch('https://test-run-build.vercel.app/api/version');
-        if (!response.ok) {
-          throw new Error('Failed to fetch version');
+        // Fetch version từ file tĩnh trên public
+        const localResponse = await fetch('/version.json');
+        if (!localResponse.ok) {
+          throw new Error('Failed to fetch local version');
         }
-        console.log(response)
-        const { version } = await response.json();
+        const { version: localVersion } = await localResponse.json();
+
+        // Fetch version từ API server
+        const serverResponse = await fetch('https://test-run-build.vercel.app/api/version');
+        if (!serverResponse.ok) {
+          throw new Error('Failed to fetch server version');
+        }
+        const { version: serverVersion } = await serverResponse.json();
+
         const currentVersion = localStorage.getItem('appVersion');
 
-        if (currentVersion && currentVersion !== version) {
-          localStorage.setItem('appVersion', version);
+        console.log('Local Version:', localVersion);
+        console.log('Server Version:', serverVersion);
+        console.log('Current Version:', currentVersion);
+
+        if (currentVersion && currentVersion !== serverVersion) {
+          localStorage.setItem('appVersion', serverVersion);
           window.location.reload(); // Reload khi có phiên bản mới
         } else {
-          localStorage.setItem('appVersion', version);
+          localStorage.setItem('appVersion', localVersion); // Lưu phiên bản ban đầu
         }
       } catch (error) {
         console.error('Error checking for updates:', error);
       }
     };
 
-    const interval = setInterval(checkForUpdates, 10000); // Kiểm tra mỗi 30 giây
+    checkForUpdates(); // Chạy ngay khi component mount
+    const interval = setInterval(checkForUpdates, 300000); // Kiểm tra mỗi 5 phút
     return () => clearInterval(interval);
   }, []);
 
   return (
     <div>
-      {/* Nội dung ứng dụng */}
       <h1>React App kkk</h1>
     </div>
   );
