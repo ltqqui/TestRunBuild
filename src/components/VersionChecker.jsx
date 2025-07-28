@@ -15,6 +15,7 @@ const VersionChecker = () => {
         // if (!res.ok) throw new Error('Failed to fetch version');
         
         const { version } = await res.json();
+        console.log(version)
         // const currentVersion = process.env.VITE_APP_VERSION || '1.0.0';
         
         // if (version !== currentVersion) {
