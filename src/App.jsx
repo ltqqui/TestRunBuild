@@ -17,6 +17,7 @@ function App() {
         if(window.localStorage.getItem('build-version')){
           if(!localResponse?.version==window.localStorage.getItem('build-version')){
               window.localStorage.setItem('build-version', localResponse.version)
+              window.location.reload()
           }
         }
         
@@ -32,7 +33,7 @@ function App() {
 
   return (
     <div>
-      <h1>React App 12313123</h1>
+      <h1>React App o</h1>
     </div>
   );
 }
