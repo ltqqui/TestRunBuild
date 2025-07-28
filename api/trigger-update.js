@@ -9,7 +9,6 @@ const pusher = new Pusher({
 })
 
 export default async (req, res) => {
-    console.log(123)
   await pusher.trigger('update-channel', 'new-deployment', {})
   res.status(200).send('Update triggered')
 }

@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
+import versionJson from '../public/version.json'
 
 function App() {
   useEffect(() => {
+    console.log(versionJson) 
     const checkForUpdates = async () => {
       try {
         const response = await fetch('https://test-run-build.vercel.app/api/version');

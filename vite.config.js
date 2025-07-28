@@ -1,18 +1,21 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import pusherPlugin from './vite-plugin-pusher'
+import { defineConfig, loadEnv } from 'vite';
+import fs from 'fs';
+import path from 'path';
 
-export default defineConfig({
-  plugins: [
-    react(),
-    pusherPlugin({
-      key: process.env.VITE_PUSHER_KEY,
-      cluster: process.env.VITE_PUSHER_CLUSTER,
-      channel: 'update-channel'
-    })
-  ],
-  define: {
-    __PUSHER_KEY__: JSON.stringify(process.env.VITE_PUSHER_KEY),
-    __PUSHER_CLUSTER__: JSON.stringify(process.env.VITE_PUSHER_CLUSTER)
+export default defineConfig(({ mode }) => {
+  // Tạo file version.json khi build
+  if (mode === 'production') {
+    const version = {
+      version: loadEnv(mode, process.cwd()).VITE_APP_VERSION || Date.now().toString(),
+      buildTime: new Date().toISOString()
+    };
+    fs.writeFileSync(
+      path.resolve(__dirname, 'public/version.json'),
+      JSON.stringify(version, null, 2)
+    );
   }
-})
+
+  return {
+    // ...các config khác
+  };
+});
