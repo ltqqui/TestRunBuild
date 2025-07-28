@@ -11,7 +11,7 @@ function App() {
         if (!localResponse.ok) {
           throw new Error('Failed to fetch local version');
         }
-        console.log(window.localStorage.getItem('build-version'))
+        // console.log(window.localStorage.getItem('build-version'))
         if(window.localStorage.getItem('build-version')){
           if(!localResponse===window.localStorage.getItem('build-version')){
               window.localStorage.setItem('build-version', localResponse)
