@@ -3,26 +3,41 @@ import { useEffect } from 'react';
 
 const VersionChecker = () => {
   useEffect(() => {
+    // Tạo file version.json trong thư mục public khi build
+    const versionFile = process.env.NODE_ENV === 'production' 
+      ? '/version.json' 
+      : '/version.json?' + Date.now();
+
     const checkForUpdates = async () => {
       try {
-        const res = await fetch('/version.json?' + new Date().getTime());
-        const data = await res.json();
+        const res = await fetch(versionFile);
+        if (!res.ok) throw new Error('Failed to fetch version');
         
-        if (data.version !== process.env.VITE_APP_VERSION) {
-          console.log('New version available, reloading...');
-          window.location.reload();
+        const { version } = await res.json();
+        const currentVersion = process.env.VITE_APP_VERSION || '1.0.0';
+        
+        if (version !== currentVersion) {
+          console.log(`New version available (${version}), reloading...`);
+          // Thông báo cho user trước khi reload
+          if (confirm('Phiên bản mới đã sẵn sàng. Cập nhật ngay?')) {
+            window.location.reload();
+          }
         }
       } catch (error) {
-        console.error('Failed to check version:', error);
+        console.error('Version check failed:', error);
       }
     };
 
-    // Kiểm tra mỗi 5 phút
-    const interval = setInterval(checkForUpdates, 0.5 * 60 * 1000);
+    // Kiểm tra ngay khi component mount
+    checkForUpdates();
+    
+    // Sau đó kiểm tra mỗi 5 phút (đã điều chỉnh từ 0.5 phút)
+    const interval = setInterval(checkForUpdates, 0.1 * 60 * 1000);
+    
     return () => clearInterval(interval);
   }, []);
 
-  return <h2>kiem tra build 2</h2>;
+  return null; // Ẩn component UI nếu không cần hiển thị
 };
 
 export default VersionChecker;
