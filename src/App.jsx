@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-// import versionJson from '../public/version.json'
 
 function App() {
   useEffect(() => {
@@ -7,44 +6,30 @@ function App() {
       try {
         // Fetch version từ file tĩnh trên public
         const localResponse = await fetch('/version.json');
-        console.log(localResponse)
+        console.log('Response:', localResponse);
         if (!localResponse.ok) {
           throw new Error('Failed to fetch local version');
         }
-        if(window.localStorage.getItem('build-version')){
-          if(!localResponse===window.localStorage.getItem('build-version')){
-              window.localStorage.setItem('build-version', localResponse)
-              window.location.reload()
-          }
+
+        const { version: newVersion } = await localResponse.json(); // Lấy version từ JSON
+        const currentVersion = window.localStorage.getItem('build-version');
+
+        console.log('New Version:', newVersion);
+        console.log('Current Version:', currentVersion);
+
+        if (currentVersion && currentVersion !== newVersion) {
+          window.localStorage.setItem('build-version', newVersion);
+          window.location.reload(); // Reload khi có phiên bản mới
+        } else if (!currentVersion) {
+          window.localStorage.setItem('build-version', newVersion); // Lưu phiên bản ban đầu
         }
-        // const { version: localVersion } = await localResponse.json();
-
-        // Fetch version từ API server
-        // const serverResponse = await fetch('https://test-run-build.vercel.app/api/version');
-        // if (!serverResponse.ok) {
-        //   throw new Error('Failed to fetch server version');
-        // }
-        // const { version: serverVersion } = await serverResponse.json();
-
-        // const currentVersion = localStorage.getItem('appVersion');
-
-        // console.log('Local Version:', localVersion);
-        // console.log('Server Version:', serverVersion);
-        // console.log('Current Version:', currentVersion);
-
-        // if (currentVersion && currentVersion !== serverVersion) {
-        //   localStorage.setItem('appVersion', serverVersion);
-        //   window.location.reload(); // Reload khi có phiên bản mới
-        // } else {
-        //   localStorage.setItem('appVersion', localVersion); // Lưu phiên bản ban đầu
-        // }
       } catch (error) {
         console.error('Error checking for updates:', error);
       }
     };
 
     checkForUpdates(); // Chạy ngay khi component mount
-    const interval = setInterval(checkForUpdates, 10000); // Kiểm tra mỗi 5 phút
+    const interval = setInterval(checkForUpdates, 300000); // Kiểm tra mỗi 5 phút
     return () => clearInterval(interval);
   }, []);
 
