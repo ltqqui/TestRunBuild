@@ -26,8 +26,7 @@ function App() {
   }, []);
   return (
     <div>
-      <h1>Lâm thanh quí 123</h1>
-      <VersionChecker />
+      <h1>Lâm thanh quí bo</h1>
     </div>
   )
 }
