@@ -11,7 +11,7 @@ function App() {
         if (!localResponse.ok) {
           throw new Error('Failed to fetch local version');
         }
-        const { version: localVersion } = await localResponse.json();
+        // const { version: localVersion } = await localResponse.json();
 
         // Fetch version từ API server
         // const serverResponse = await fetch('https://test-run-build.vercel.app/api/version');
@@ -20,18 +20,18 @@ function App() {
         // }
         // const { version: serverVersion } = await serverResponse.json();
 
-        const currentVersion = localStorage.getItem('appVersion');
+        // const currentVersion = localStorage.getItem('appVersion');
 
-        console.log('Local Version:', localVersion);
-        console.log('Server Version:', serverVersion);
-        console.log('Current Version:', currentVersion);
+        // console.log('Local Version:', localVersion);
+        // console.log('Server Version:', serverVersion);
+        // console.log('Current Version:', currentVersion);
 
-        if (currentVersion && currentVersion !== serverVersion) {
-          localStorage.setItem('appVersion', serverVersion);
-          window.location.reload(); // Reload khi có phiên bản mới
-        } else {
-          localStorage.setItem('appVersion', localVersion); // Lưu phiên bản ban đầu
-        }
+        // if (currentVersion && currentVersion !== serverVersion) {
+        //   localStorage.setItem('appVersion', serverVersion);
+        //   window.location.reload(); // Reload khi có phiên bản mới
+        // } else {
+        //   localStorage.setItem('appVersion', localVersion); // Lưu phiên bản ban đầu
+        // }
       } catch (error) {
         console.error('Error checking for updates:', error);
       }
