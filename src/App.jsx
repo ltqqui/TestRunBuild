@@ -1,3 +1,4 @@
+import { Workbox } from 'workbox-window';
 import './App.css'
 import VersionChecker from './components/VersionChecker'
 function App() {
