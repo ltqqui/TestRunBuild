@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import versionJson from '../public/version.json'
+import axios from 'axios';
 
 function App() {
   useEffect(() => {
@@ -7,8 +8,9 @@ function App() {
       window.location.reload(true); // Tải lại từ server
       try {
         // Fetch version từ file tĩnh trên public
-        const localResponse = await fetch('/version.json');
+        const localResponse = await axios.get('/version.json');
         console.log(versionJson)
+        console.log(localResponse)
         window.location.reload()
         if (!localResponse.ok) {
           throw new Error('Failed to fetch local version');
