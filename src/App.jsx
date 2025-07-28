@@ -8,6 +8,7 @@ function App() {
         if (!response.ok) {
           throw new Error('Failed to fetch version');
         }
+        console.log(response)
         const { version } = await response.json();
         const currentVersion = localStorage.getItem('appVersion');
 
