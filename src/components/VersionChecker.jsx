@@ -22,7 +22,7 @@ const VersionChecker = () => {
     return () => window.removeEventListener('focus', checkVersion)
   }, [])
 
-  return <h1>kakakaka</h1>
+  return <h1>khong co gi</h1>
 }
 
 export default VersionChecker;
