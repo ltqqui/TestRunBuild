@@ -37,7 +37,7 @@ const VersionChecker = () => {
     return () => clearInterval(interval);
   }, []);
 
-  return <h1>moi hahaha</h1>; // Ẩn component UI nếu không cần hiển thị
+  return <h1>i love you</h1>; // Ẩn component UI nếu không cần hiển thị
 };
 
 export default VersionChecker;
