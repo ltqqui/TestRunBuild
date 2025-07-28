@@ -6,6 +6,7 @@ function App() {
       try {
         // Fetch version từ file tĩnh trên public
         const localResponse = await fetch('/version.json');
+        console.log(window.localStorage.getItem('build-version'))
         console.log('Response:', localResponse);
         if (!localResponse.ok) {
           throw new Error('Failed to fetch local version');
