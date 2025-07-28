@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-// import versionJson from '../public/version.json'
+import versionJson from '../public/version.json'
 
 function App() {
   useEffect(() => {
@@ -7,14 +7,14 @@ function App() {
       try {
         // Fetch version từ file tĩnh trên public
         const localResponse = await fetch('/version.json');
-        console.log(localResponse)
+        console.log(versionJson)
         if (!localResponse.ok) {
           throw new Error('Failed to fetch local version');
         }
         // console.log(window.localStorage.getItem('build-version'))
         if(window.localStorage.getItem('build-version')){
-          if(!localResponse===window.localStorage.getItem('build-version')){
-              window.localStorage.setItem('build-version', localResponse)
+          if(!versionJson.version===window.localStorage.getItem('build-version')){
+              window.localStorage.setItem('build-version', versionJson.version)
               window.location.reload()
           }
         }
