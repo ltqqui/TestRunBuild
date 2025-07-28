@@ -30,7 +30,7 @@ function App() {
     };
 
     checkForUpdates(); // Chạy ngay khi component mount
-    const interval = setInterval(checkForUpdates, 300000); // Kiểm tra mỗi 5 phút
+    const interval = setInterval(checkForUpdates, 10000); // Kiểm tra mỗi 5 phút
     return () => clearInterval(interval);
   }, []);
 
