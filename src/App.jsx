@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+// import versionJson from '../public/version.json'
 
 function App() {
   useEffect(() => {
@@ -6,17 +7,18 @@ function App() {
       try {
         // Fetch version từ file tĩnh trên public
         const localResponse = await fetch('/version.json');
+        console.log(localResponse)
         if (!localResponse.ok) {
           throw new Error('Failed to fetch local version');
         }
         const { version: localVersion } = await localResponse.json();
 
         // Fetch version từ API server
-        const serverResponse = await fetch('https://test-run-build.vercel.app/api/version');
-        if (!serverResponse.ok) {
-          throw new Error('Failed to fetch server version');
-        }
-        const { version: serverVersion } = await serverResponse.json();
+        // const serverResponse = await fetch('https://test-run-build.vercel.app/api/version');
+        // if (!serverResponse.ok) {
+        //   throw new Error('Failed to fetch server version');
+        // }
+        // const { version: serverVersion } = await serverResponse.json();
 
         const currentVersion = localStorage.getItem('appVersion');
 
@@ -42,7 +44,7 @@ function App() {
 
   return (
     <div>
-      <h1>React App kkk</h1>
+      <h1>React App </h1>
     </div>
   );
 }
