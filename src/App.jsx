@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+// import versionJson from '../public/version.json'
 
 function App() {
   useEffect(() => {
@@ -6,24 +7,18 @@ function App() {
       try {
         // Fetch version từ file tĩnh trên public
         const localResponse = await fetch('/version.json');
-        console.log(window.localStorage.getItem('build-version'))
-        console.log('Response:', localResponse);
+        console.log(localResponse)
         if (!localResponse.ok) {
           throw new Error('Failed to fetch local version');
         }
-
-        const { version: newVersion } = await localResponse.json(); // Lấy version từ JSON
-        const currentVersion = window.localStorage.getItem('build-version');
-
-        console.log('New Version:', newVersion);
-        console.log('Current Version:', currentVersion);
-
-        if (currentVersion && currentVersion !== newVersion) {
-          window.localStorage.setItem('build-version', newVersion);
-          window.location.reload(); // Reload khi có phiên bản mới
-        } else if (!currentVersion) {
-          window.localStorage.setItem('build-version', newVersion); // Lưu phiên bản ban đầu
+        console.log(window.localStorage.getItem('build-version'))
+        if(window.localStorage.getItem('build-version')){
+          if(!localResponse===window.localStorage.getItem('build-version')){
+              window.localStorage.setItem('build-version', localResponse)
+              window.location.reload()
+          }
         }
+        
       } catch (error) {
         console.error('Error checking for updates:', error);
       }
