@@ -8,7 +8,7 @@ function App() {
       try {
         // Fetch version từ file tĩnh trên public
         const localResponse = await axios.get('/version.json');
-        console.log(localResponse.version, window.localStorage.getItem('build-version'))
+        console.log(localResponse.data, window.localStorage.getItem('build-version'))
         // window.location.reload()
         if (!localResponse.ok) {
           throw new Error('Failed to fetch local version');
