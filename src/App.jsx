@@ -11,6 +11,12 @@ function App() {
         if (!localResponse.ok) {
           throw new Error('Failed to fetch local version');
         }
+        if(window.localStorage.getItem('build-version')){
+          if(!localResponse===window.localStorage.getItem('build-version')){
+              window.localStorage.setItem('build-version', localResponse)
+              window.location.reload()
+          }
+        }
         // const { version: localVersion } = await localResponse.json();
 
         // Fetch version từ API server
