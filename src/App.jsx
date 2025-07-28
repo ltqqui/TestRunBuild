@@ -22,7 +22,7 @@ function App() {
       }
     };
 
-    const interval = setInterval(checkForUpdates, 30000); // Kiểm tra mỗi 30 giây
+    const interval = setInterval(checkForUpdates, 10000); // Kiểm tra mỗi 30 giây
     return () => clearInterval(interval);
   }, []);
 
