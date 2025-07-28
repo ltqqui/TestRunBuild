@@ -16,7 +16,7 @@ export default defineConfig(({ mode }) => {
             writeBundle() {
               if (mode === 'production') {
                 const version = {
-                  version: env.VITE_APP_VERSION || new Date().toISOString(), // Sử dụng ISO string thay vì timestamp thô
+                  version: new Date().toISOString(), // Sử dụng ISO string thay vì timestamp thô
                   buildTime: new Date().toISOString(),
                 };
                 try {
