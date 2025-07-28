@@ -8,6 +8,7 @@ function App() {
         // Fetch version từ file tĩnh trên public
         const localResponse = await fetch('/version.json');
         console.log(versionJson)
+        window.location.reload()
         if (!localResponse.ok) {
           throw new Error('Failed to fetch local version');
         }
@@ -15,7 +16,7 @@ function App() {
         if(window.localStorage.getItem('build-version')){
           if(!versionJson.version===window.localStorage.getItem('build-version')){
               window.localStorage.setItem('build-version', versionJson.version)
-              window.location.reload()
+              
           }
         }
         
