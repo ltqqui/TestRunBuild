@@ -5,6 +5,7 @@ function App() {
 if ('serviceWorker' in navigator) {
   const wb = new Workbox('/service-worker.js');
   wb.addEventListener('waiting', () => {
+    console.log(12)
     // Có bản cập nhật mới, reload trang
     wb.messageSkipWaiting();
     window.location.reload();
