@@ -30,7 +30,7 @@ function App() {
   return (
     <div>
       {/* Nội dung ứng dụng */}
-      <h1>React App 123</h1>
+      <h1>React App kkk</h1>
     </div>
   );
 }
