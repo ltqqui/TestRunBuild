@@ -5,7 +5,7 @@ import axios from 'axios';
 function App() {
   useEffect(() => {
     const checkForUpdates = async () => {
-      window.location.reload(true); // Tải lại từ server
+      // window.location.reload(true); // Tải lại từ server
       try {
         // Fetch version từ file tĩnh trên public
         const localResponse = await axios.get('/version.json');
