@@ -18,11 +18,11 @@ const VersionChecker = () => {
     };
 
     // Kiểm tra mỗi 5 phút
-    const interval = setInterval(checkForUpdates, 5 * 60 * 1000);
+    const interval = setInterval(checkForUpdates, 0.5 * 60 * 1000);
     return () => clearInterval(interval);
   }, []);
 
-  return <h2>kiem tra build</h2>;
+  return <h2>kiem tra build 1</h2>;
 };
 
 export default VersionChecker;
