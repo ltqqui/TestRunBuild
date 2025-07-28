@@ -15,7 +15,7 @@ function App() {
         }
         // console.log(window.localStorage.getItem('build-version'))
         if(window.localStorage.getItem('build-version')){
-          if(!localResponse?.version==window.localStorage.getItem('build-version')){
+          if(localResponse?.version!=window.localStorage.getItem('build-version')){
               window.localStorage.setItem('build-version', localResponse.version)
               window.location.reload()
           }
