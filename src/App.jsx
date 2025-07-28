@@ -31,7 +31,7 @@ function App() {
 
   return (
     <div>
-      <h1>React App 123</h1>
+      <h1>React App</h1>
     </div>
   );
 }
