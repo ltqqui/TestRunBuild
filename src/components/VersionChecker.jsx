@@ -11,6 +11,7 @@ const VersionChecker = () => {
         
         if (version !== import.meta.env.VITE_APP_VERSION) {
           // Hiển thị thông báo cập nhật
+          console.log(123)
         }
       } catch (error) {
         console.error('Version check failed:', error)
