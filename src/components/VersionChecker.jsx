@@ -10,19 +10,20 @@ const VersionChecker = () => {
 
     const checkForUpdates = async () => {
       try {
-        const res = await fetch(versionFile);
-        if (!res.ok) throw new Error('Failed to fetch version');
+        const res = await fetch('/version.json?');
+        console.log(res)
+        // if (!res.ok) throw new Error('Failed to fetch version');
         
-        const { version } = await res.json();
-        const currentVersion = process.env.VITE_APP_VERSION || '1.0.0';
+        // const { version } = await res.json();
+        // const currentVersion = process.env.VITE_APP_VERSION || '1.0.0';
         
-        if (version !== currentVersion) {
-          console.log(`New version available (${version}), reloading...`);
-          // Thông báo cho user trước khi reload
-          if (confirm('Phiên bản mới đã sẵn sàng. Cập nhật ngay?')) {
-            window.location.reload();
-          }
-        }
+        // if (version !== currentVersion) {
+        //   console.log(`New version available (${version}), reloading...`);
+        //   // Thông báo cho user trước khi reload
+        //   if (confirm('Phiên bản mới đã sẵn sàng. Cập nhật ngay?')) {
+        //     window.location.reload();
+        //   }
+        // }
       } catch (error) {
         console.error('Version check failed:', error);
       }
