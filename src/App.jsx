@@ -11,7 +11,7 @@ function App() {
         const localResponse = await axios.get('/version.json');
         console.log(versionJson)
         console.log(localResponse)
-        window.location.reload()
+        // window.location.reload()
         if (!localResponse.ok) {
           throw new Error('Failed to fetch local version');
         }
