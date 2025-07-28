@@ -22,7 +22,7 @@ const VersionChecker = () => {
     return () => clearInterval(interval);
   }, []);
 
-  return <h2>kiem tra build 1</h2>;
+  return <h2>kiem tra build 2</h2>;
 };
 
 export default VersionChecker;
