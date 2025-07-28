@@ -1,12 +1,13 @@
-import { Workbox } from 'workbox-window';
-import './App.css'
-import VersionChecker from './components/VersionChecker'
 import { useEffect } from 'react';
+
 function App() {
   useEffect(() => {
     const checkForUpdates = async () => {
       try {
-        const response = await fetch('/api/version'); // API trả về version
+        const response = await fetch('https://test-run-build.vercel.app/api/version');
+        if (!response.ok) {
+          throw new Error('Failed to fetch version');
+        }
         const { version } = await response.json();
         const currentVersion = localStorage.getItem('appVersion');
 
@@ -21,14 +22,16 @@ function App() {
       }
     };
 
-    const interval = setInterval(checkForUpdates, 30000); // Kiểm tra mỗi 30s
+    const interval = setInterval(checkForUpdates, 30000); // Kiểm tra mỗi 30 giây
     return () => clearInterval(interval);
   }, []);
+
   return (
     <div>
-      <h1>Lâm thanh quí bo</h1>
+      {/* Nội dung ứng dụng */}
+      <h1>React App</h1>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
